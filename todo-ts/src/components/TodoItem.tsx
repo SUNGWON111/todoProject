@@ -11,12 +11,13 @@ export default function TodoItem({ todo, onDelete, onUpdate }: TodoItemProps) {
   //console.log(todo.id);
   const onClickDelBtn = () => onDelete(todo.id);
   const onClickUpdateBtn = () => onUpdate(todo.id);
+  console.log(new Date());
 
   return (
     <div className="TodoItem">
       <input type="checkbox" onChange={onClickUpdateBtn} />
       <div className="content">{todo.content}</div>
-      <div className="date">{todo.date}</div>
+      <div className="date">{new Date(todo.date).toLocaleDateString()}</div>
       <button onClick={onClickDelBtn}>삭제</button>
     </div>
   );

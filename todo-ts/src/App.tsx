@@ -62,7 +62,7 @@ function App() {
         id: Math.max(...todos.map((todo: Data) => todo.id), 0) + 1,
         isDone: false,
         content: content,
-        date: new Date().getDate(),
+        date: new Date().getTime(),
       },
     });
   };
