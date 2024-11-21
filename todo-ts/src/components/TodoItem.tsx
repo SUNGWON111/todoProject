@@ -11,7 +11,6 @@ export default function TodoItem({ todo, onDelete, onUpdate }: TodoItemProps) {
   //console.log(todo.id);
   const onClickDelBtn = () => onDelete(todo.id);
   const onClickUpdateBtn = () => onUpdate(todo.id);
-  console.log(new Date());
 
   return (
     <div className="TodoItem">
