@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, createContext } from "react";
 import "./App.css";
 import Editor from "./components/Editor";
 import Header from "./components/Header";
@@ -36,6 +36,18 @@ const mocData: Data[] = [
     date: new Date().getTime(),
   },
 ];
+type todoContextType = {
+  todos: Data[];
+  onCreate: (content: string) => void;
+  onDelete: (targetId: number) => void;
+  onUpdate: (targetId: number) => void;
+};
+export const todoContext = createContext<todoContextType>({
+  todos: mocData,
+  onCreate: () => {},
+  onDelete: () => {},
+  onUpdate: () => {},
+});
 
 function reducer(todos: Data[], dispatch: Action) {
   switch (dispatch.type) {
@@ -83,8 +95,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Editor onCreate={onCreate} />
-      <List todos={todos} onDelete={onDelete} onUpdate={onUpdate} />
+      <todoContext.Provider value={{ todos, onCreate, onDelete, onUpdate }}>
+        <Editor />
+        <List />
+      </todoContext.Provider>
     </div>
   );
 }

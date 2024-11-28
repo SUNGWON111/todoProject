@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "../componentsCss/List.css";
 import TodoItem from "./TodoItem";
-import { Data } from "../App";
+import { todoContext } from "../App";
 
-type ListProps = {
-  todos: Data[];
-  onDelete: (targetId: number) => void;
-  onUpdate: (targetId: number) => void;
-};
+// type ListProps = {
 
-export default function List({ todos, onDelete, onUpdate }: ListProps) {
+//   onDelete: (targetId: number) => void;
+//   onUpdate: (targetId: number) => void;
+// };
+
+export default function List() {
+  const { todos } = useContext(todoContext);
   const [search, setSearch] = useState<string>("");
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -22,14 +23,7 @@ export default function List({ todos, onDelete, onUpdate }: ListProps) {
 
   const filteredTodo = getSearchData();
   const listItems = filteredTodo.map((todo) => {
-    return (
-      <TodoItem
-        key={todo.id}
-        todo={todo}
-        onDelete={onDelete}
-        onUpdate={onUpdate}
-      />
-    );
+    return <TodoItem key={todo.id} todo={todo} />;
   });
   return (
     <div className="List">

@@ -1,14 +1,14 @@
-import { Data } from "../App";
+import { useContext } from "react";
+import { Data, todoContext } from "../App";
 import "../componentsCss/TodoItem.css";
 
 type TodoItemProps = {
   todo: Data;
-  onDelete: (targetId: number) => void;
-  onUpdate: (targetId: number) => void;
 };
 
-export default function TodoItem({ todo, onDelete, onUpdate }: TodoItemProps) {
+export default function TodoItem({ todo }: TodoItemProps) {
   //console.log(todo.id);
+  const { onDelete, onUpdate } = useContext(todoContext);
   const onClickDelBtn = () => onDelete(todo.id);
   const onClickUpdateBtn = () => onUpdate(todo.id);
 
